@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leg</title>
+    <link rel="icon" type="image/x-icon" href="../main/ico1.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../main/resized-icon-32x32 .ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../main/resized-icon-16x16.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --phosphor-blue: #00f0ff;
+            --phosphor-green: #00ff9d;
+            --phosphor-pink: #ff00aa;
+            --phosphor-purple: #b700ff;
+            --phosphor-yellow: #ffee00;
+            --light: #f1f5f9;
+            --dark: #020617;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary);
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--phosphor-blue);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .date-box {
+            display: inline-block;
+            background-color: var(--phosphor-pink);
+            color: var(--dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 1rem 0;
+            box-shadow: 0 0 15px rgba(255, 0, 170, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .workout-container {
+            background: var(--secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .exercise {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .exercise:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .exercise-image {
+            width: 200px;
+            height: 120px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .exercise-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .exercise-title {
+            font-size: 1.5rem;
+            color: var(--phosphor-blue);
+            margin-bottom: 0.3rem;
+        }
+
+        .exercise-sets {
+            color: var(--phosphor-green);
+            font-weight: 600;
+        }
+
+        .notes-box {
+            background: rgba(0, 240, 255, 0.1);
+            border-left: 4px solid var(--phosphor-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            color: rgba(0, 240, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: bold;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .notes-box strong {
+            color: var(--phosphor-blue);
+        }
+
+        .input-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.3rem;
+        }
+
+        .input-group input {
+            background: var(--primary);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--light);
+            padding: 0.7rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--phosphor-blue);
+            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+        }
+
+        .history {
+            background: rgba(183, 0, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 3px solid var(--phosphor-purple);
+        }
+
+        .history-title {
+            color: var(--phosphor-purple);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .history-entry {
+            font-size: 0.85rem;
+            color: var(--light);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .history-entry:before {
+            content: "•";
+            color: var(--phosphor-purple);
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }
+
+        .btn-save {
+            background: var(--phosphor-green);
+            color: var(--dark);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        .btn-save:hover {
+            background: #00e68a;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
+        }
+
+        .btn-back {
+            background: transparent;
+            color: var(--phosphor-blue);
+            border: 2px solid var(--phosphor-blue);
+        }
+
+        .btn-back:hover {
+            background: rgba(0, 240, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--phosphor-green);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--phosphor-blue);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--phosphor-blue);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--phosphor-pink);
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .records-table th,
+        .records-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .records-table th {
+            background-color: rgba(0, 240, 255, 0.1);
+            color: var(--phosphor-blue);
+            font-weight: 600;
+        }
+
+        .records-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .records-table tr:hover {
+            background-color: rgba(0, 240, 255, 0.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .exercise-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .exercise-image {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                width: 100%;
+                height: 150px;
+            }
+
+            .input-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .records-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        .btn-reset {
+            background: var(--phosphor-yellow);
+            color: var(--dark);
+            box-shadow: 0 0 15px rgba(255, 238, 0, 0.3);
+        }
+
+        .btn-reset:hover {
+            background: #e6d700;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 238, 0, 0.5);
+        }
+
+        .set-separator {
+            height: 2px;
+            background-color: var(--phosphor-pink);
+            margin: 1.5rem 0;
+            opacity: 0.3;
+            box-shadow: 0 0 5px rgba(183, 0, 255, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Leg</h1>
+            <div class="date-box" id="current-date">السبت - ١ يناير ٢٠٢٣</div>
+        </header>
+
+        <div class="workout-container">
+            <!-- Exercise 1 -->
+            <div class="exercise delay-1">
+                <div class="exercise-header">
+                    <div class="exercise-image" onclick="showRecordsModal('SL Leg Extension', 'ex1')">
+                        <img src="1.PNG" alt="SL Leg Extension">
+                    </div>
+                    <div>
+                        <h3 class="exercise-title">SL Leg Extension</h3>
+                        <p class="exercise-sets">2 sets</p>
+                    </div>
+                </div>
+
+                <div class="notes-box">
+                    <strong>Notes:</strong> بادئ بالشمال.
+                </div>
+
+                <!-- Set 1 -->
+                <div class="input-fields">
+                    <div class="input-group">
+                        <label for="ex1-set1-weight">Weight (kg)</label>
+                        <input type="number" id="ex1-set1-weight" step="0.5" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set1-right-reps">Right Leg Reps</label>
+                        <input type="number" id="ex1-set1-right-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set1-right-tank">Right Tank</label>
+                        <input type="number" id="ex1-set1-right-tank" min="0" max="10">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set1-left-reps">Left Leg Reps</label>
+                        <input type="number" id="ex1-set1-left-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set1-left-tank">Left Tank</label>
+                        <input type="number" id="ex1-set1-left-tank" min="0" max="10">
+                    </div>
+                </div>
+                <div class="set-separator"></div>
+                <!-- Set 2 -->
+                <div class="input-fields">
+                    <div class="input-group">
+                        <label for="ex1-set2-weight">Weight (kg)</label>
+                        <input type="number" id="ex1-set2-weight" step="0.5" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set2-right-reps">Right Leg Reps</label>
+                        <input type="number" id="ex1-set2-right-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set2-right-tank">Right Tank</label>
+                        <input type="number" id="ex1-set2-right-tank" min="0" max="10">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set2-left-reps">Left Leg Reps</label>
+                        <input type="number" id="ex1-set2-left-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex1-set2-left-tank">Left Tank</label>
+                        <input type="number" id="ex1-set2-left-tank" min="0" max="10">
+                    </div>
+                </div>
+
+                <div class="history" id="ex1-history">
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">No previous records</div>
+                </div>
+            </div>
+
+            <!-- Exercise 2 -->
+            <div class="exercise delay-2">
+                <div class="exercise-header">
+                    <div class="exercise-image" onclick="showRecordsModal('Adductors Machine', 'ex2')">
+                        <img src="2.PNG" alt="Adductors Machine">
+                    </div>
+                    <div>
+                        <h3 class="exercise-title">Adductors Machine</h3>
+                        <p class="exercise-sets">1 set</p>
+                    </div>
+                </div>
+
+                <div class="notes-box">
+                    <strong>Notes:</strong> No Notes.
+                </div>
+
+                <!-- Set 1 -->
+                <div class="input-fields">
+                    <div class="input-group">
+                        <label for="ex2-set1-weight">Weight (kg)</label>
+                        <input type="number" id="ex2-set1-weight" step="0.5" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex2-set1-reps">Reps</label>
+                        <input type="number" id="ex2-set1-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex2-set1-tank">Tank</label>
+                        <input type="number" id="ex2-set1-tank" min="0" max="10">
+                    </div>
+                </div>
+
+                <div class="history" id="ex2-history">
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">No previous records</div>
+                </div>
+            </div>
+
+            <!-- Exercise 3 -->
+            <div class="exercise delay-3">
+                <div class="exercise-header">
+                    <div class="exercise-image" onclick="showRecordsModal('Hack Squat', 'ex3')">
+                        <img src="3.PNG" alt="Hack Squat">
+                    </div>
+                    <div>
+                        <h3 class="exercise-title">Hack Squat</h3>
+                        <p class="exercise-sets">1 set</p>
+                    </div>
+                </div>
+
+                <div class="notes-box">
+                    <strong>Notes:</strong> No Notes.
+                </div>
+
+                <!-- Set 1 -->
+                <div class="input-fields">
+                    <div class="input-group">
+                        <label for="ex3-set1-weight">Weight (kg)</label>
+                        <input type="number" id="ex3-set1-weight" step="0.5" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex3-set1-reps">Reps</label>
+                        <input type="number" id="ex3-set1-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex3-set1-tank">Tank</label>
+                        <input type="number" id="ex3-set1-tank" min="0" max="10">
+                    </div>
+                </div>
+
+                <div class="history" id="ex3-history">
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">No previous records</div>
+                </div>
+            </div>
+
+            <!-- Exercise 4 -->
+            <div class="exercise delay-4">
+                <div class="exercise-header">
+                    <div class="exercise-image" onclick="showRecordsModal('Dumbbell RDL', 'ex4')">
+                        <img src="4.PNG" alt="Dumbbell RDL">
+                    </div>
+                    <div>
+                        <h3 class="exercise-title">Dumbbell RDL</h3>
+                        <p class="exercise-sets">1 set</p>
+                    </div>
+                </div>
+
+                <div class="notes-box">
+                    <strong>Notes:</strong> No Notes.
+                </div>
+
+                <!-- Set 1 -->
+                <div class="input-fields">
+                    <div class="input-group">
+                        <label for="ex4-set1-weight">Weight (kg)</label>
+                        <input type="number" id="ex4-set1-weight" step="0.5" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex4-set1-reps">Reps</label>
+                        <input type="number" id="ex4-set1-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex4-set1-tank">Tank</label>
+                        <input type="number" id="ex4-set1-tank" min="0" max="10">
+                    </div>
+                </div>
+
+                <div class="history" id="ex4-history">
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">No previous records</div>
+                </div>
+            </div>
+
+            <!-- Exercise 5 -->
+            <div class="exercise delay-5">
+                <div class="exercise-header">
+                    <div class="exercise-image" onclick="showRecordsModal('Standing Calf', 'ex5')">
+                        <img src="5.PNG" alt="Standing Calf">
+                    </div>
+                    <div>
+                        <h3 class="exercise-title">Standing Calf</h3>
+                        <p class="exercise-sets">2 sets</p>
+                    </div>
+                </div>
+
+                <div class="notes-box">
+                    <strong>Notes:</strong> Hack Squat.
+                </div>
+
+                <!-- Set 1 -->
+                <div class="input-fields">
+                    <div class="input-group">
+                        <label for="ex5-set1-weight">Weight (kg)</label>
+                        <input type="number" id="ex5-set1-weight" step="0.5" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex5-set1-reps">Reps</label>
+                        <input type="number" id="ex5-set1-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex5-set1-tank">Tank</label>
+                        <input type="number" id="ex5-set1-tank" min="0" max="10">
+                    </div>
+                </div>
+                <div class="set-separator"></div>
+                <!-- Set 2 -->
+                <div class="input-fields">
+                    <div class="input-group">
+                        <label for="ex5-set2-weight">Weight (kg)</label>
+                        <input type="number" id="ex5-set2-weight" step="0.5" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex5-set2-reps">Reps</label>
+                        <input type="number" id="ex5-set2-reps" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ex5-set2-tank">Tank</label>
+                        <input type="number" id="ex5-set2-tank" min="0" max="10">
+                    </div>
+                </div>
+
+                <div class="history" id="ex5-history">
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">No previous records</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-save" id="save-btn">Save Workout</button>
+            <button class="btn btn-reset" id="reset-btn">Reset</button>
+            <button class="btn btn-back">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Workout saved successfully!
+    </div>
+
+    <!-- Records Modal -->
+    <div class="modal" id="recordsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalExerciseTitle">Exercise Records</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalExerciseContent">
+                <table class="records-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Set</th>
+                            <th>Weight (kg)</th>
+                            <th>Reps</th>
+                            <th>Tank</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsTableBody">
+                        <!-- Records will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current date in Arabic
+        const arabicMonths = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+        const arabicDays = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+
+        const today = new Date();
+        const dayName = arabicDays[today.getDay()];
+        const dayNum = today.getDate();
+        const monthName = arabicMonths[today.getMonth()];
+        const year = today.getFullYear();
+
+        document.getElementById('current-date').textContent = `${dayName} - ${dayNum} ${monthName} ${year}`;
+
+        // Back button functionality
+        document.querySelector('.btn-back').addEventListener('click', function () {
+            window.location.href = '../main/index.html';
+        });
+
+        // Modal functions
+        function showRecordsModal(exerciseName, exerciseId) {
+            const modal = document.getElementById('recordsModal');
+            const modalTitle = document.getElementById('modalExerciseTitle');
+            const tableBody = document.getElementById('recordsTableBody');
+
+            modalTitle.textContent = `${exerciseName} Records`;
+            tableBody.innerHTML = '';
+
+            // Get all saved workouts from localStorage
+            const allWorkouts = getAllSavedWorkouts();
+            const exerciseRecords = [];
+
+            // Extract all records for this exercise
+            for (const [date, workoutData] of Object.entries(allWorkouts)) {
+                if (workoutData[exerciseId]) {
+                    const exerciseData = workoutData[exerciseId];
+
+                    // Handle different exercise types (multi-set, single-set, single-leg)
+                    if (exerciseData.set1 && exerciseData.set2) {
+                        // Multi-set exercise (like ex1 and ex5)
+                        if (exerciseData.set1.rightReps) {
+                            // Single leg exercise (ex1)
+                            exerciseRecords.push({
+                                date,
+                                set: 'Set 1 - Right Leg',
+                                weight: exerciseData.set1.weight || '--',
+                                reps: exerciseData.set1.rightReps || '--',
+                                tank: exerciseData.set1.rightTank || '--'
+                            });
+                            exerciseRecords.push({
+                                date,
+                                set: 'Set 1 - Left Leg',
+                                weight: exerciseData.set1.weight || '--',
+                                reps: exerciseData.set1.leftReps || '--',
+                                tank: exerciseData.set1.leftTank || '--'
+                            });
+                            exerciseRecords.push({
+                                date,
+                                set: 'Set 2 - Right Leg',
+                                weight: exerciseData.set2.weight || '--',
+                                reps: exerciseData.set2.rightReps || '--',
+                                tank: exerciseData.set2.rightTank || '--'
+                            });
+                            exerciseRecords.push({
+                                date,
+                                set: 'Set 2 - Left Leg',
+                                weight: exerciseData.set2.weight || '--',
+                                reps: exerciseData.set2.leftReps || '--',
+                                tank: exerciseData.set2.leftTank || '--'
+                            });
+                        } else {
+                            // Regular multi-set exercise (ex5)
+                            exerciseRecords.push({
+                                date,
+                                set: 'Set 1',
+                                weight: exerciseData.set1.weight || '--',
+                                reps: exerciseData.set1.reps || '--',
+                                tank: exerciseData.set1.tank || '--'
+                            });
+                            exerciseRecords.push({
+                                date,
+                                set: 'Set 2',
+                                weight: exerciseData.set2.weight || '--',
+                                reps: exerciseData.set2.reps || '--',
+                                tank: exerciseData.set2.tank || '--'
+                            });
+                        }
+                    } else if (exerciseData.set1 && exerciseData.set1.rightReps) {
+                        // Single-set single-leg exercise
+                        exerciseRecords.push({
+                            date,
+                            set: 'Right Leg',
+                            weight: exerciseData.set1.weight || '--',
+                            reps: exerciseData.set1.rightReps || '--',
+                            tank: exerciseData.set1.rightTank || '--'
+                        });
+                        exerciseRecords.push({
+                            date,
+                            set: 'Left Leg',
+                            weight: exerciseData.set1.weight || '--',
+                            reps: exerciseData.set1.leftReps || '--',
+                            tank: exerciseData.set1.leftTank || '--'
+                        });
+                    } else if (exerciseData.set1) {
+                        // Single-set exercise (ex2, ex3, ex4)
+                        exerciseRecords.push({
+                            date,
+                            set: 'Set 1',
+                            weight: exerciseData.set1.weight || '--',
+                            reps: exerciseData.set1.reps || '--',
+                            tank: exerciseData.set1.tank || '--'
+                        });
+                    }
+                }
+            }
+
+            // Sort records by date (newest first)
+            exerciseRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Populate the table
+            if (exerciseRecords.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No previous records found</td></tr>';
+            } else {
+                exerciseRecords.forEach(record => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${formatDate(record.date)}</td>
+                        <td>${record.set}</td>
+                        <td>${record.weight}</td>
+                        <td>${record.reps}</td>
+                        <td>${record.tank}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('recordsModal').style.display = 'none';
+        }
+
+        // Helper function to get all saved workouts from localStorage
+        function getAllSavedWorkouts() {
+            const allWorkouts = {};
+
+            // Loop through all keys in localStorage
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('legWorkout_')) {
+                    const date = key.replace('legWorkout_', '');
+                    allWorkouts[date] = JSON.parse(localStorage.getItem(key));
+                }
+            }
+
+            return allWorkouts;
+        }
+
+        // Helper function to format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Load saved data from localStorage
+        function loadSavedData() {
+            const savedData = JSON.parse(localStorage.getItem('legWorkout')) || {};
+
+            // Exercise 1 (Single Leg Extension)
+            if (savedData.ex1) {
+                document.getElementById('ex1-set1-weight').value = savedData.ex1.set1.weight || '';
+                document.getElementById('ex1-set1-right-reps').value = savedData.ex1.set1.rightReps || '';
+                document.getElementById('ex1-set1-right-tank').value = savedData.ex1.set1.rightTank || '';
+                document.getElementById('ex1-set1-left-reps').value = savedData.ex1.set1.leftReps || '';
+                document.getElementById('ex1-set1-left-tank').value = savedData.ex1.set1.leftTank || '';
+                document.getElementById('ex1-set2-weight').value = savedData.ex1.set2.weight || '';
+                document.getElementById('ex1-set2-right-reps').value = savedData.ex1.set2.rightReps || '';
+                document.getElementById('ex1-set2-right-tank').value = savedData.ex1.set2.rightTank || '';
+                document.getElementById('ex1-set2-left-reps').value = savedData.ex1.set2.leftReps || '';
+                document.getElementById('ex1-set2-left-tank').value = savedData.ex1.set2.leftTank || '';
+
+                const history1 = document.getElementById('ex1-history');
+                history1.innerHTML = `
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">Set 1: ${savedData.ex1.set1.weight || '--'}kg - Right: ${savedData.ex1.set1.rightReps || '--'} reps (Tank: ${savedData.ex1.set1.rightTank || '--'}), Left: ${savedData.ex1.set1.leftReps || '--'} reps (Tank: ${savedData.ex1.set1.leftTank || '--'})</div>
+                    <div class="history-entry">Set 2: ${savedData.ex1.set2.weight || '--'}kg - Right: ${savedData.ex1.set2.rightReps || '--'} reps (Tank: ${savedData.ex1.set2.rightTank || '--'}), Left: ${savedData.ex1.set2.leftReps || '--'} reps (Tank: ${savedData.ex1.set2.leftTank || '--'})</div>
+                `;
+            }
+
+            // Exercise 2 (Adductors Machine)
+            if (savedData.ex2) {
+                document.getElementById('ex2-set1-weight').value = savedData.ex2.set1.weight || '';
+                document.getElementById('ex2-set1-reps').value = savedData.ex2.set1.reps || '';
+                document.getElementById('ex2-set1-tank').value = savedData.ex2.set1.tank || '';
+
+                const history2 = document.getElementById('ex2-history');
+                history2.innerHTML = `
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">Set 1: ${savedData.ex2.set1.weight || '--'}kg × ${savedData.ex2.set1.reps || '--'} reps (Tank: ${savedData.ex2.set1.tank || '--'})</div>
+                `;
+            }
+
+            // Exercise 3 (Hack Squat)
+            if (savedData.ex3) {
+                document.getElementById('ex3-set1-weight').value = savedData.ex3.set1.weight || '';
+                document.getElementById('ex3-set1-reps').value = savedData.ex3.set1.reps || '';
+                document.getElementById('ex3-set1-tank').value = savedData.ex3.set1.tank || '';
+
+                const history3 = document.getElementById('ex3-history');
+                history3.innerHTML = `
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">Set 1: ${savedData.ex3.set1.weight || '--'}kg × ${savedData.ex3.set1.reps || '--'} reps (Tank: ${savedData.ex3.set1.tank || '--'})</div>
+                `;
+            }
+
+            // Exercise 4 (Dumbbell RDL)
+            if (savedData.ex4) {
+                document.getElementById('ex4-set1-weight').value = savedData.ex4.set1.weight || '';
+                document.getElementById('ex4-set1-reps').value = savedData.ex4.set1.reps || '';
+                document.getElementById('ex4-set1-tank').value = savedData.ex4.set1.tank || '';
+
+                const history4 = document.getElementById('ex4-history');
+                history4.innerHTML = `
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">Set 1: ${savedData.ex4.set1.weight || '--'}kg × ${savedData.ex4.set1.reps || '--'} reps (Tank: ${savedData.ex4.set1.tank || '--'})</div>
+                `;
+            }
+
+            // Exercise 5 (Standing Calf)
+            if (savedData.ex5) {
+                document.getElementById('ex5-set1-weight').value = savedData.ex5.set1.weight || '';
+                document.getElementById('ex5-set1-reps').value = savedData.ex5.set1.reps || '';
+                document.getElementById('ex5-set1-tank').value = savedData.ex5.set1.tank || '';
+                document.getElementById('ex5-set2-weight').value = savedData.ex5.set2.weight || '';
+                document.getElementById('ex5-set2-reps').value = savedData.ex5.set2.reps || '';
+                document.getElementById('ex5-set2-tank').value = savedData.ex5.set2.tank || '';
+
+                const history5 = document.getElementById('ex5-history');
+                history5.innerHTML = `
+                    <div class="history-title">Last Recorded:</div>
+                    <div class="history-entry">Set 1: ${savedData.ex5.set1.weight || '--'}kg × ${savedData.ex5.set1.reps || '--'} reps (Tank: ${savedData.ex5.set1.tank || '--'})</div>
+                    <div class="history-entry">Set 2: ${savedData.ex5.set2.weight || '--'}kg × ${savedData.ex5.set2.reps || '--'} reps (Tank: ${savedData.ex5.set2.tank || '--'})</div>
+                `;
+            }
+        }
+
+        // Save button functionality
+        document.getElementById('save-btn').addEventListener('click', function () {
+            // Get all input values
+            const workoutData = {
+                ex1: {
+                    set1: {
+                        weight: document.getElementById('ex1-set1-weight').value,
+                        rightReps: document.getElementById('ex1-set1-right-reps').value,
+                        rightTank: document.getElementById('ex1-set1-right-tank').value,
+                        leftReps: document.getElementById('ex1-set1-left-reps').value,
+                        leftTank: document.getElementById('ex1-set1-left-tank').value
+                    },
+                    set2: {
+                        weight: document.getElementById('ex1-set2-weight').value,
+                        rightReps: document.getElementById('ex1-set2-right-reps').value,
+                        rightTank: document.getElementById('ex1-set2-right-tank').value,
+                        leftReps: document.getElementById('ex1-set2-left-reps').value,
+                        leftTank: document.getElementById('ex1-set2-left-tank').value
+                    }
+                },
+                ex2: {
+                    set1: {
+                        weight: document.getElementById('ex2-set1-weight').value,
+                        reps: document.getElementById('ex2-set1-reps').value,
+                        tank: document.getElementById('ex2-set1-tank').value
+                    }
+                },
+                ex3: {
+                    set1: {
+                        weight: document.getElementById('ex3-set1-weight').value,
+                        reps: document.getElementById('ex3-set1-reps').value,
+                        tank: document.getElementById('ex3-set1-tank').value
+                    }
+                },
+                ex4: {
+                    set1: {
+                        weight: document.getElementById('ex4-set1-weight').value,
+                        reps: document.getElementById('ex4-set1-reps').value,
+                        tank: document.getElementById('ex4-set1-tank').value
+                    }
+                },
+                ex5: {
+                    set1: {
+                        weight: document.getElementById('ex5-set1-weight').value,
+                        reps: document.getElementById('ex5-set1-reps').value,
+                        tank: document.getElementById('ex5-set1-tank').value
+                    },
+                    set2: {
+                        weight: document.getElementById('ex5-set2-weight').value,
+                        reps: document.getElementById('ex5-set2-reps').value,
+                        tank: document.getElementById('ex5-set2-tank').value
+                    }
+                }
+            };
+
+            // Save to localStorage with date as part of the key
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem(`legWorkout_${today}`, JSON.stringify(workoutData));
+
+            // Also save as the current workout for quick access
+            localStorage.setItem('legWorkout', JSON.stringify(workoutData));
+
+            // Show notification
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+
+            // Update history displays
+            loadSavedData();
+        });
+
+        // Load saved data when page loads
+        document.addEventListener('DOMContentLoaded', loadSavedData);
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('recordsModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Reset button functionality
+        document.getElementById('reset-btn').addEventListener('click', function () {
+            // Get all input elements
+            const inputs = document.querySelectorAll('input[type="number"]');
+
+            // Clear all input fields
+            inputs.forEach(input => {
+                input.value = '';
+            });
+
+            // Show notification
+            const notification = document.getElementById('notification');
+            notification.textContent = 'All fields cleared!';
+            notification.classList.add('show');
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>

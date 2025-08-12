@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Push_Pull_Leg</title>
+    <link rel="icon" type="image/x-icon" href="ico1.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="resized-icon-32x32.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="resized-icon-16x16.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --phosphor-blue: #00f0ff;
+            --phosphor-green: #00ff9d;
+            --phosphor-pink: #ff00aa;
+            --phosphor-purple: #b700ff;
+            --phosphor-yellow: #ffee00;
+            --light: #f1f5f9;
+            --dark: #020617;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary);
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--phosphor-blue);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--phosphor-green);
+            text-shadow: 0 0 8px rgba(0, 255, 157, 0.2);
+        }
+
+        .motto {
+
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .motto span.no-gain {
+            color: var(--phosphor-blue);
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.7);
+        }
+
+        .motto span.pain {
+            color: var(--phosphor-yellow);
+            animation: electric-pain 1.5s infinite alternate;
+            position: relative;
+            display: inline-block;
+        }
+
+        @keyframes electric-pain {
+            0% {
+                text-shadow: 0 0 5px var(--phosphor-yellow),
+                    0 0 10px var(--phosphor-yellow),
+                    0 0 15px var(--phosphor-yellow),
+                    0 0 20px var(--phosphor-pink);
+                transform: scale(1);
+            }
+
+            20% {
+                text-shadow: 0 0 2px var(--phosphor-yellow),
+                    0 0 5px var(--phosphor-yellow),
+                    0 0 7px var(--phosphor-yellow),
+                    0 0 10px var(--phosphor-pink);
+                transform: scale(1.02);
+            }
+
+            40% {
+                text-shadow: 0 0 10px var(--phosphor-yellow),
+                    0 0 20px var(--phosphor-yellow),
+                    0 0 30px var(--phosphor-yellow),
+                    0 0 40px var(--phosphor-pink);
+                transform: scale(1.05);
+            }
+
+            60% {
+                text-shadow: 0 0 5px var(--phosphor-yellow),
+                    0 0 15px var(--phosphor-yellow),
+                    0 0 25px var(--phosphor-yellow),
+                    0 0 35px var(--phosphor-pink);
+                transform: scale(1.03);
+            }
+
+            80% {
+                text-shadow: 0 0 8px var(--phosphor-yellow),
+                    0 0 18px var(--phosphor-yellow),
+                    0 0 28px var(--phosphor-yellow),
+                    0 0 38px var(--phosphor-pink);
+                transform: scale(1.07);
+            }
+
+            100% {
+                text-shadow: 0 0 10px var(--phosphor-yellow),
+                    0 0 25px var(--phosphor-yellow),
+                    0 0 40px var(--phosphor-yellow),
+                    0 0 50px var(--phosphor-pink);
+                transform: scale(1.1);
+            }
+        }
+
+        .workout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .workout-card {
+            background: var(--secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            text-decoration: none;
+            /* Remove underline from entire card */
+        }
+
+        .workout-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+            border-color: var(--phosphor-blue);
+        }
+
+        .workout-card-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .workout-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(15, 23, 42, 0.8));
+        }
+
+        .workout-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            transition: transform 0.5s ease;
+        }
+
+        .workout-card:hover .workout-card-image img {
+            transform: scale(1.1);
+        }
+
+        .workout-card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .workout-card h2 {
+            color: var(--phosphor-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            /* Remove underline from heading */
+        }
+
+        .workout-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .workout-card .day-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--phosphor-pink);
+            color: var(--dark);
+            padding: 0.5rem 1rem;
+            /* Increased padding */
+            border-radius: 20px;
+            font-size: 1rem;
+            /* Larger font size */
+            font-weight: bolder;
+            box-shadow: 0 0 10px rgba(255, 0, 170, 0.5);
+            text-decoration: none;
+            /* Remove underline */
+            min-width: 80px;
+            /* Ensure consistent width */
+            text-align: center;
+        }
+
+        /* Animation classes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+
+        .delay-5 {
+            animation-delay: 1s;
+        }
+
+        /* Glow effect */
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--phosphor-blue);
+            }
+
+            to {
+                text-shadow: 0 0 15px var(--phosphor-blue), 0 0 20px var(--phosphor-purple);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .workout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .motto {
+                font-size: 1.4rem;
+            }
+
+            .workout-card .day-badge {
+                font-size: 0.9rem;
+                /* Slightly smaller on mobile */
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        /*******************************************************************************************************/
+        /* Thunder and Fire Theme Additions */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                    rgba(0, 0, 0, 0.9) 0%,
+                    rgba(15, 23, 42, 0.8) 20%,
+                    rgba(0, 0, 0, 0.9) 100%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Thunder effect container */
+        .thunder-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* Thunder lightning effect */
+        .lightning {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        /* Fire effect */
+        .fire-effect {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top,
+                    rgba(255, 80, 0, 0.8) 0%,
+                    rgba(255, 200, 0, 0.4) 50%,
+                    transparent 100%);
+            z-index: -1;
+            pointer-events: none;
+            animation: flicker 3s infinite alternate;
+        }
+
+        /* Fire particles */
+        .fire-particle {
+            position: absolute;
+            bottom: 0;
+            background: radial-gradient(circle,
+                    rgba(255, 200, 0, 0.8) 0%,
+                    rgba(255, 80, 0, 0.6) 50%,
+                    transparent 100%);
+            border-radius: 50%;
+            filter: blur(5px);
+            animation: rise linear infinite;
+            pointer-events: none;
+        }
+
+        /* Thunder animation */
+        @keyframes thunder {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            20% {
+                opacity: 0.3;
+            }
+
+            21% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Fire flicker animation */
+        @keyframes flicker {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                height: 150px;
+            }
+
+            50% {
+                opacity: 1;
+                height: 180px;
+            }
+        }
+
+        /* Particle rise animation */
+        @keyframes rise {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Updated glow effect for thunder theme */
+        .glow {
+            animation: thunder-glow 2s infinite alternate;
+        }
+
+        @keyframes thunder-glow {
+            from {
+                text-shadow: 0 0 5px var(--phosphor-blue),
+                    0 0 2px white;
+            }
+
+            to {
+                text-shadow: 0 0 15px var(--phosphor-blue),
+                    0 0 10px white,
+                    0 0 20px var(--phosphor-yellow);
+            }
+        }
+
+        /* Updated card hover effects */
+        .workout-card:hover {
+            box-shadow: 0 15px 30px rgba(255, 100, 0, 0.4),
+                0 0 20px rgba(0, 240, 255, 0.4);
+            border-color: var(--phosphor-yellow);
+        }
+
+        /* Updated badge colors for fire theme */
+        .workout-card .day-badge {
+            background-color: var(--phosphor-yellow);
+            color: var(--dark);
+            box-shadow: 0 0 10px rgba(255, 238, 0, 0.7);
+        }
+
+        /* Add some ember particles to cards */
+        .workout-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center,
+                    rgba(255, 100, 0, 0.1) 0%,
+                    transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .workout-card:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="motto">
+                <span class="no-gain">No </span>
+                <span class="pain">PAIN </span>
+                <span class="pain"> No</span>
+                <span class="no-gain"> GAIN</span>
+
+            </div>
+            <h1 class="glow">Push_Pull_Leg</h1>
+            <p class="subtitle">Track your progress and push your limits</p>
+        </header>
+
+        <div class="workout-grid">
+            <!-- Push A -->
+            <a href="..\push A\index.html" target="_blank" class="workout-card slide-up delay-1">
+                <div class="workout-card-image">
+                    <img src="push.jpg" alt="Push Workout">
+                </div>
+                <div class="workout-card-content">
+                    <h2>Push A</h2>
+                </div>
+                <span class="day-badge">السبت</span>
+            </a>
+
+            <!-- Pull A -->
+            <a href="..\pull A\index.html" target="_blank" class="workout-card slide-up delay-2">
+                <div class="workout-card-image">
+                    <img src="pull2.jpg" alt="Pull Workout">
+                </div>
+                <div class="workout-card-content">
+                    <h2>Pull A</h2>
+                </div>
+                <span class="day-badge">الأحد</span>
+            </a>
+
+            <!-- Push B -->
+            <a href="..\push B\index.html" target="_blank" class="workout-card slide-up delay-3">
+                <div class="workout-card-image">
+                    <img src="push.jpg" alt="Push Workout">
+                </div>
+                <div class="workout-card-content">
+                    <h2>Push B</h2>
+                </div>
+                <span class="day-badge">الثلاثاء</span>
+            </a>
+
+            <!-- Pull B -->
+            <a href="..\pull B\index.html" target="_blank" class="workout-card slide-up delay-4">
+                <div class="workout-card-image">
+                    <img src="pull2.jpg" alt="Pull Workout">
+                </div>
+                <div class="workout-card-content">
+                    <h2>Pull B</h2>
+                </div>
+                <span class="day-badge">الأربعاء</span>
+            </a>
+
+            <!-- Legs -->
+            <a href="..\leg\index.html" target="_blank" class="workout-card slide-up delay-5">
+                <div class="workout-card-image">
+                    <img src="leg2.jpg" alt="Leg Workout">
+                </div>
+                <div class="workout-card-content">
+                    <h2>Legs</h2>
+                </div>
+                <span class="day-badge">الجمعة</span>
+            </a>
+        </div>
+    </div>
+</body>
+<script>
+    // Create thunder and fire effects
+    document.addEventListener('DOMContentLoaded', function () {
+        // Create thunder container
+        const thunderContainer = document.createElement('div');
+        thunderContainer.className = 'thunder-container';
+        document.body.appendChild(thunderContainer);
+
+        // Create fire effect
+        const fireEffect = document.createElement('div');
+        fireEffect.className = 'fire-effect';
+        document.body.appendChild(fireEffect);
+
+        // Generate random lightning
+        function createLightning() {
+            const lightning = document.createElement('div');
+            lightning.className = 'lightning';
+            thunderContainer.appendChild(lightning);
+
+            // Random delay for lightning
+            const delay = Math.random() * 15000 + 5000;
+
+            setTimeout(() => {
+                lightning.style.opacity = '0';
+                lightning.style.animation = 'thunder 0.5s linear';
+
+                // Remove after animation
+                setTimeout(() => {
+                    lightning.remove();
+                }, 500);
+
+                // Create next lightning
+                createLightning();
+            }, delay);
+        }
+
+        // Create initial lightning
+        createLightning();
+
+        // Create fire particles
+        function createFireParticles() {
+            const particle = document.createElement('div');
+            particle.className = 'fire-particle';
+
+            // Random size
+            const size = Math.random() * 30 + 10;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+
+            // Random animation duration
+            const duration = Math.random() * 5 + 3;
+            particle.style.animationDuration = `${duration}s`;
+
+            fireEffect.appendChild(particle);
+
+            // Remove after animation completes
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        // Create fire particles periodically
+        setInterval(createFireParticles, 100);
+
+        // Create initial batch of particles
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createFireParticles, i * 100);
+        }
+    });
+    // Update copyright year automatically
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+</html>
